@@ -3,10 +3,21 @@ A docker container for ioq3 based on a debian 10 distroless image
 
 # Build instructions
 Copy the *.pk3 files from your official q3 install into the pk3 directory.
-```docker build . -t ioq3:latest```
+Create a Makefile.local. For convenience you can read the values from the parameters.json file as described in
+[Running in Azure](#running-in-azure) using the following
+```
+$ cat << "EOF" > Makefile.local
+IOQ3_IMAGE := $(shell jq -r .docker_image_path  parameters.json)
+AZ_LOCATION := $(shell jq -r .az_location parameters.json)
+EOF
+```
+Then run:
+```
+$ make docker-build
 
-# Running instructions
-```docker run --rm -ioq3:latest```
+
+# Running locally
+`$ docker run --rm <your image name>:latest`
 
 Remember not to push the image containing ID's copyrighted pk3 files to a public Docker registry!
 
