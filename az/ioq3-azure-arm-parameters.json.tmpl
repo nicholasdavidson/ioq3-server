@@ -1,0 +1,50 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "containerName": {
+            "value": .container_name
+        },
+        "location": {
+            "value": .az_location
+        },
+        "imageType": {
+            "value": "Private"
+        },
+        "imageName": {
+            "value": .docker_image_path
+        },
+        "osType": {
+            "value": "Linux"
+        },
+        "numberCpuCores": {
+            "value": "1"
+        },
+        "memory": {
+            "value": "1"
+        },
+        "restartPolicy": {
+            "value": "OnFailure"
+        },
+        "imageRegistryLoginServer": {
+            "value": "index.docker.io"
+        },
+        "imageUsername": {
+            "value": .dh_user
+        },
+        "imagePassword": {
+            "value": .dh_password
+        },
+        "ipAddressType": {
+            "value": "Public"
+        },
+        "ports": {
+            "value": [
+                {
+                    "port": "27960",
+                    "protocol": "UDP"
+                }
+            ]
+        }
+    }
+}

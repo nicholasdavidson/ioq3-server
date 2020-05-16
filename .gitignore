@@ -1,1 +1,4 @@
 pk3/*.pk3
+output/*
+Makefile.local
+parameters.json
