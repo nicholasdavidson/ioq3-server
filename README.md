@@ -14,7 +14,7 @@ EOF
 Then run:
 ```
 $ make docker-build
-
+```
 
 # Running locally
 `$ docker run --rm <your image name>:latest`
