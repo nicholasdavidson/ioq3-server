@@ -1,3 +1,15 @@
+// --- very basic settings ---
+// determines how a game module is loaded (0: load native, 1: load qvm and interpret it, 2: load qvm and compile it)
+set vm_game     2
+set vm_cgame    2 
+set vm_ui       2
+set dedicated   1
+// How much ram to reserve for the server
+set com_hunkmegs 256
+// Port to listen on
+set net_port  27960
+
+
 // --- contact and admin
 sets ".Admin" "Administrator"
 sets ".email" "admin@example.com"
@@ -11,9 +23,10 @@ seta g_motd "Welcome to the Distroless Q3 DM server"
 
 // --- misc settings ---
 seta sv_pure "1"
+seta sv_maxclients 24
+seta g_maxGameClients 24
 
 // --- gametype settings ---
-seta g_gametype "3"
 seta g_teamAutoJoin "0"
 seta g_teamForceBalance "1" 
 seta g_log server.log 
@@ -24,7 +37,4 @@ seta logfile "3"
 seta sv_allowdownload "1" 
 seta snaps 40
 seta sv_maxRate "25000" 	
-seta sv_floodProtect "1" 
-
-// --- map rotation ---
-exec maprotation.cfg
+seta sv_floodProtect "1"
