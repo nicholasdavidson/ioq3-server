@@ -17,7 +17,7 @@ output/ioq3-azure-arm-parameters.json: az/ioq3-azure-arm-parameters.json.tmpl pa
 
 
 output/q3config_server.cfg: cfg/q3config_server.cfg.tmpl Makefile.local
-	sed -e 's|//\(seta rcon_password\) "changeme"|\1 "$(RCON_PASSWORD)"|' cfg/q3config_server.cfg.tmpl > $(@) || rm $(@)
+	sed -e 's|//\(seta rconPassword\) "changeme"|\1 "$(RCON_PASSWORD)"|' cfg/q3config_server.cfg.tmpl > $(@) || rm $(@)
 
 .PHONY: create-parameters
 create-parameters: output/ioq3-azure-arm-parameters.json
