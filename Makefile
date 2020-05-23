@@ -3,14 +3,14 @@ IOQ3_IMAGE ?=
 AZ_LOCATION ?= uksouth
 AZ_RESOURCEGROUP ?= ioq3-server
 RCON_PASSWORD ?= $(shell cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n1)
-
+DOCKER ?= docker
 .PHONY: docker-build
 docker-build: output/q3config_server.cfg
-	docker build . -t $(IOQ3_IMAGE)
+	"$(DOCKER)" build . -t $(IOQ3_IMAGE)
 
 .PHONY: docker-push
 docker-push:
-	docker push $(IOQ3_IMAGE)
+	"$(DOCKER)" push $(IOQ3_IMAGE)
 	
 output/ioq3-azure-arm-parameters.json: az/ioq3-azure-arm-parameters.json.tmpl parameters.json
 	cat parameters.json | jq -f az/ioq3-azure-arm-parameters.json.tmpl > $(@) || rm $(@)
@@ -30,6 +30,8 @@ az-deploy: output/ioq3-azure-arm-parameters.json
 	--resource-group $(AZ_RESOURCEGROUP) \
 	--template-file az/ioq3-azure-arm.json \
 	--parameters @output/ioq3-azure-arm-parameters.json
+	@echo Server running on IP:
+	az container show --name $(AZ_RESOURCEGROUP) --resource-group $(AZ_RESOURCEGROUP) | jq -r '.ipAddress.ip'
 
 .PHONY: az-destroy
 az-destroy:
@@ -40,10 +42,10 @@ az-destroy:
 
 .PHONY: start-local
 local-deploy: docker-build
-	docker run --rm -d \
+	"$(DOCKER)" run --rm -d \
 	-p 27961:27960/udp \
 	--name ioq3-debug $(IOQ3_IMAGE)
 
 .PHONY: local destroy
 local-destroy:
-	docker stop ioq3-debug
+	"$(DOCKER)" stop ioq3-debug
