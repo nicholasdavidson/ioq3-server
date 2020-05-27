@@ -1,6 +1,6 @@
 {
     "container_name": "ioq3-server",
-    "az_region": "uksouth",
+    "az_location": "uksouth",
     "dh_password": "", 
     "dh_user": "",
     "docker_image_path": ""
